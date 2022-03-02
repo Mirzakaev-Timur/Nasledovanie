@@ -19,7 +19,7 @@ public class Repository {
         return items;
     }
 
-    public void removeById(int id) throws NotFoundException {
+    public void removeById(int id) {
         if (findById(id) == null) {
             throw new NotFoundException("Товар с номером: " + id + " не найден");
         }

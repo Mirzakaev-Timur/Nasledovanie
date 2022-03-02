@@ -14,22 +14,22 @@ class RepositoryTest {
     private Repository repo = new Repository();
     private Product shirt = new Product(1, "Shirt", 101);
     private Book harryPotter = new Book(12, "Harry Potter", 211, "Дж. Роулинг");
-    private Smartphone iphoneX = new Smartphone(32, "IphoneX", 500, "Apple");
+    private Smartphone iphone13 = new Smartphone(32, "Iphone13", 500, "Apple");
 
     @Test
-    void add3Product() {
+    void addThreeProduct() {
         repo.save(shirt);
         repo.save(harryPotter);
-        repo.save(iphoneX);
+        repo.save(iphone13);
 
         Product[] actual = repo.findAll();
-        Product[] expected = {shirt, harryPotter, iphoneX};
+        Product[] expected = {shirt, harryPotter, iphone13};
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void add2Product() {
+    void addTwoProduct() {
         Repository repo = new Repository();
         repo.save(shirt);
         repo.save(harryPotter);
@@ -41,11 +41,11 @@ class RepositoryTest {
     }
 
     @Test
-    void add1Product() {
-        repo.save(iphoneX);
+    void addProduct() {
+        repo.save(iphone13);
 
         Product[] actual = repo.findAll();
-        Product[] expected = {iphoneX};
+        Product[] expected = {iphone13};
 
         assertArrayEquals(expected, actual);
     }
@@ -62,7 +62,7 @@ class RepositoryTest {
     void removeByIdAll() throws NotFoundException {
         repo.save(shirt);
         repo.save(harryPotter);
-        repo.save(iphoneX);
+        repo.save(iphone13);
 
         repo.removeById(12);
         repo.removeById(32);
@@ -78,29 +78,22 @@ class RepositoryTest {
     void removeByIdNotFound() {
         repo.save(shirt);
         repo.save(harryPotter);
-        repo.save(iphoneX);
+        repo.save(iphone13);
 
         Assertions.assertThrows(NotFoundException.class,()-> repo.removeById(77));
-
-        Product[] actual = repo.findAll();
-        Product[] expected = {shirt, harryPotter, iphoneX};
-
-        assertArrayEquals(expected, actual);
     }
 
     @Test
-    void removeByIdOneProd() throws NotFoundException {
+    void removeByIdOneProduct() {
         repo.save(shirt);
         repo.save(harryPotter);
-        repo.save(iphoneX);
+        repo.save(iphone13);
 
         repo.removeById(12);
 
         Product[] actual = repo.findAll();
-        Product[] expected = {shirt, iphoneX};
+        Product[] expected = {shirt, iphone13};
 
         assertArrayEquals(expected, actual);
     }
-
-
 }
